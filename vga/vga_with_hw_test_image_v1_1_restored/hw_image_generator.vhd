@@ -1,37 +1,24 @@
---------------------------------------------------------------------------------
---
---   FileName:         hw_image_generator.vhd
---   Dependencies:     none
---   Design Software:  Quartus II 64-bit Version 12.1 Build 177 SJ Full Version
---
---   HDL CODE IS PROVIDED "AS IS."  DIGI-KEY EXPRESSLY DISCLAIMS ANY
---   WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT
---   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
---   PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL DIGI-KEY
---   BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL
---   DAMAGES, LOST PROFITS OR LOST DATA, HARM TO YOUR EQUIPMENT, COST OF
---   PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR SERVICES, ANY CLAIMS
---   BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF),
---   ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER SIMILAR COSTS.
---
---   Version History
---   Version 1.0 05/10/2013 Scott Larson
---     Initial Public Release
---    
---------------------------------------------------------------------------------
-
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 ENTITY hw_image_generator IS
 	GENERIC(
 		pixels_y :	INTEGER := 1920;    --row that first color will persist until
-		pixels_x	:	INTEGER := 1080);    --column that first color will persist until
+		pixels_x	:	INTEGER := 1080;    --column that first color will persist until
+		rowMin   :  INTEGER := 440;
+		rowMax   :  INTEGER := 692;
+		columnMin :  INTEGER := 154;
+		columnMax :  INTEGER := 358);
+		--test : INTEGER := 440);
 	PORT(
 		disp_ena		:	IN		STD_LOGIC;	--display enable ('1' = display time, '0' = blanking time)
 		row			:	IN		INTEGER;		--row pixel coordinate
 		column		:	IN		INTEGER;		--column pixel coordinate
+		reset			:  IN    STD_LOGIC;  --reset the game
+		--clk			:  IN    STD_LOGIC;
 		
+		sw0				:  IN    STD_LOGIC; -- button 1 input
 		-- 7 is the MSB, carries the most weight when changing colors.
 		red			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '0');  --red magnitude output to DAC
 		green			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '0');  --green magnitude output to DAC
@@ -39,12 +26,14 @@ ENTITY hw_image_generator IS
 END hw_image_generator;
 
 ARCHITECTURE behavior OF hw_image_generator IS
+	signal columnVector : unsigned(8 downto 0) := (OTHERS => '0'); --000000000
 BEGIN
 	PROCESS(disp_ena, row, column)
+	VARIABLE test : INTEGER;
+	VARIABLE test2 : INTEGER;
 	BEGIN
-
 		IF(disp_ena = '1') THEN		--display time
-		
+			
 			----------------
 			-- BACKGROUND --
 			----------------
@@ -124,13 +113,40 @@ BEGIN
 				blue <= (6 => '1',
 							OTHERS => '0');
 			END IF;
+			-- game logic
+		IF(sw0 = '1') THEN
+		columnVector <= columnVector + 1;
+		END IF;
 		
-		-- blanking time
-		ELSE
+		--rowMin   :  INTEGER := 440;
+		--rowMax   :  INTEGER := 692;
+		--columnMin:  INTEGER := 154;
+		--columnMax:  INTEGER := 358
+		
+	-- A
+	IF(columnVector = "000000000") THEN
+		IF(row > rowMin AND row < rowMax AND column > columnMin AND column < columnMax) THEN
+					red <= (6 => '1',
+							  OTHERS => '0');
+					green	<= (6 => '1',
+								 OTHERS => '0');
+					blue <= (6 => '1',
+								OTHERS => '0');
+				END IF;
+		ELSIF(columnVector = "000000001") THEN
+		IF(row > (rowMin + 306) AND row < (rowMax + 306) AND column > columnMin AND column < columnMax) THEN
+					red <= (6 => '1',
+							  OTHERS => '0');
+					green	<= (6 => '1',
+								 OTHERS => '0');
+					blue <= (6 => '1',
+								OTHERS => '0');
+		END IF; -- end columnVector = "000000010"
+		END IF; -- end columnVector = "000000001"
+			ELSE
 			red <= (OTHERS => '0');
 			green <= (OTHERS => '0');
 			blue <= (OTHERS => '0');
-		END IF;
-	
+		END IF; -- disp_enable if statement
 	END PROCESS;
 END behavior;
