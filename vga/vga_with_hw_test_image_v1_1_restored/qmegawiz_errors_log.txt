@@ -1,0 +1,10 @@
+
+
+C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_pll.vhd
+
+Nov 09 02PM:18:23>: Error in CNX file format.
+
+Error messages are listed in file
+C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)

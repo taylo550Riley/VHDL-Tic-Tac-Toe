@@ -12,6 +12,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "r1",
+					"strict" : false
+				},
+				{
 					"name" : "blue[7]",
 					"strict" : false
 				},
@@ -77,6 +81,14 @@
 				},
 				{
 					"name" : "red[6]",
+					"strict" : false
+				},
+				{
+					"name" : "b1",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
 					"strict" : false
 				}
 			]

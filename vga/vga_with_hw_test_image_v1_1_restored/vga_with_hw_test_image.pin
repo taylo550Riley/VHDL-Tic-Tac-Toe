@@ -276,7 +276,7 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : AG10      :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG11      :        :                   :         : 3         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG12      :        :                   :         : 3         :                
 GND                          : AG13      : gnd    :                   :         :           :                
-GND+                         : AG14      :        :                   :         : 3         :                
+clock                        : AG14      : input  : 3.3-V LVTTL       :         : 3         : Y              
 GND+                         : AG15      :        :                   :         : 4         :                
 GND                          : AG16      : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG17      :        :                   :         : 4         :                
@@ -475,7 +475,7 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : G15       :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : G16       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : G17       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : G18       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : G19       :        :                   :         : 7         :                
+r1                           : G19       : output : 3.3-V LVTTL       :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : G20       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : G21       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : G22       :        :                   :         : 7         :                
@@ -619,7 +619,7 @@ VCCINT                       : M19       : power  :                   : 1.2V    
 GND                          : M20       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : M21       :        :                   :         : 6         :                
 MSEL2                        : M22       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : M23       :        :                   :         : 6         :                
+b1                           : M23       : input  : 3.3-V LVTTL       :         : 6         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : M24       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : M25       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : M26       :        :                   :         : 6         :                
