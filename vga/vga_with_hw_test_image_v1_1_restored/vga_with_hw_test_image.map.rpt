@@ -1,5 +1,5 @@
 Analysis & Synthesis report for vga_with_hw_test_image
-Tue Nov 16 14:01:12 2021
+Mon Nov 22 20:12:31 2021
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
 
 
@@ -53,16 +53,16 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Nov 16 14:01:12 2021       ;
+; Analysis & Synthesis Status        ; Successful - Mon Nov 22 20:12:31 2021       ;
 ; Quartus Prime Version              ; 16.1.0 Build 196 10/24/2016 SJ Lite Edition ;
 ; Revision Name                      ; vga_with_hw_test_image                      ;
 ; Top-level Entity Name              ; vga_with_hw_test_image                      ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 381                                         ;
-;     Total combinational functions  ; 358                                         ;
-;     Dedicated logic registers      ; 77                                          ;
-; Total registers                    ; 77                                          ;
-; Total pins                         ; 64                                          ;
+; Total logic elements               ; 585                                         ;
+;     Total combinational functions  ; 562                                         ;
+;     Dedicated logic registers      ; 109                                         ;
+; Total registers                    ; 109                                         ;
+; Total pins                         ; 37                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -191,39 +191,39 @@ agreement for further details.
 +----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------------------------------------------------+---------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                                        ;
-+---------------------------------------------+--------------------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                                ;
-+---------------------------------------------+--------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 381                                                                                  ;
-;                                             ;                                                                                      ;
-; Total combinational functions               ; 358                                                                                  ;
-; Logic element usage by number of LUT inputs ;                                                                                      ;
-;     -- 4 input functions                    ; 248                                                                                  ;
-;     -- 3 input functions                    ; 44                                                                                   ;
-;     -- <=2 input functions                  ; 66                                                                                   ;
-;                                             ;                                                                                      ;
-; Logic elements by mode                      ;                                                                                      ;
-;     -- normal mode                          ; 337                                                                                  ;
-;     -- arithmetic mode                      ; 21                                                                                   ;
-;                                             ;                                                                                      ;
-; Total registers                             ; 77                                                                                   ;
-;     -- Dedicated logic registers            ; 77                                                                                   ;
-;     -- I/O registers                        ; 0                                                                                    ;
-;                                             ;                                                                                      ;
-; I/O pins                                    ; 64                                                                                   ;
-;                                             ;                                                                                      ;
-; Embedded Multiplier 9-bit elements          ; 0                                                                                    ;
-;                                             ;                                                                                      ;
-; Total PLLs                                  ; 1                                                                                    ;
-;     -- PLLs                                 ; 1                                                                                    ;
-;                                             ;                                                                                      ;
-; Maximum fan-out node                        ; altpll0:inst2|altpll:altpll_component|altpll0_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 53                                                                                   ;
-; Total fan-out                               ; 1547                                                                                 ;
-; Average fan-out                             ; 2.74                                                                                 ;
-+---------------------------------------------+--------------------------------------------------------------------------------------+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimated Total logic elements              ; 585         ;
+;                                             ;             ;
+; Total combinational functions               ; 562         ;
+; Logic element usage by number of LUT inputs ;             ;
+;     -- 4 input functions                    ; 327         ;
+;     -- 3 input functions                    ; 66          ;
+;     -- <=2 input functions                  ; 169         ;
+;                                             ;             ;
+; Logic elements by mode                      ;             ;
+;     -- normal mode                          ; 445         ;
+;     -- arithmetic mode                      ; 117         ;
+;                                             ;             ;
+; Total registers                             ; 109         ;
+;     -- Dedicated logic registers            ; 109         ;
+;     -- I/O registers                        ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 37          ;
+;                                             ;             ;
+; Embedded Multiplier 9-bit elements          ; 0           ;
+;                                             ;             ;
+; Total PLLs                                  ; 1           ;
+;     -- PLLs                                 ; 1           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; clock~input ;
+; Maximum fan-out                             ; 58          ;
+; Total fan-out                               ; 2248        ;
+; Average fan-out                             ; 3.01        ;
++---------------------------------------------+-------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -231,11 +231,11 @@ agreement for further details.
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                         ; Entity Name            ; Library Name ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------+------------------------+--------------+
-; |vga_with_hw_test_image                  ; 358 (0)             ; 77 (0)                    ; 0           ; 0            ; 0       ; 0         ; 64   ; 0            ; |vga_with_hw_test_image                                                                     ; vga_with_hw_test_image ; work         ;
+; |vga_with_hw_test_image                  ; 562 (0)             ; 109 (0)                   ; 0           ; 0            ; 0       ; 0         ; 37   ; 0            ; |vga_with_hw_test_image                                                                     ; vga_with_hw_test_image ; work         ;
 ;    |altpll0:inst2|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |vga_with_hw_test_image|altpll0:inst2                                                       ; altpll0                ; work         ;
 ;       |altpll:altpll_component|          ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |vga_with_hw_test_image|altpll0:inst2|altpll:altpll_component                               ; altpll                 ; work         ;
 ;          |altpll0_altpll:auto_generated| ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |vga_with_hw_test_image|altpll0:inst2|altpll:altpll_component|altpll0_altpll:auto_generated ; altpll0_altpll         ; work         ;
-;    |hw_image_generator:inst6|            ; 288 (288)           ; 26 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |vga_with_hw_test_image|hw_image_generator:inst6                                            ; hw_image_generator     ; work         ;
+;    |hw_image_generator:inst6|            ; 492 (492)           ; 58 (58)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |vga_with_hw_test_image|hw_image_generator:inst6                                            ; hw_image_generator     ; work         ;
 ;    |vga_controller:inst1|                ; 70 (70)             ; 51 (51)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |vga_with_hw_test_image|vga_controller:inst1                                                ; vga_controller         ; work         ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -255,13 +255,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------+---------------------------------+------------------------+
 ; Latch Name                                          ; Latch Enable Signal             ; Free of Timing Hazards ;
 +-----------------------------------------------------+---------------------------------+------------------------+
-; hw_image_generator:inst6|ha0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
-; hw_image_generator:inst6|hb0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
-; hw_image_generator:inst6|hc0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
-; hw_image_generator:inst6|hd0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
-; hw_image_generator:inst6|he0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
-; hw_image_generator:inst6|hf0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
-; hw_image_generator:inst6|hg0                        ; hw_image_generator:inst6|ha0    ; yes                    ;
 ; hw_image_generator:inst6|blue[7]                    ; hw_image_generator:inst6|red[7] ; yes                    ;
 ; hw_image_generator:inst6|blue[6]                    ; hw_image_generator:inst6|red[7] ; yes                    ;
 ; hw_image_generator:inst6|blue[5]                    ; hw_image_generator:inst6|red[7] ; yes                    ;
@@ -286,7 +279,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; hw_image_generator:inst6|red[2]                     ; hw_image_generator:inst6|red[7] ; yes                    ;
 ; hw_image_generator:inst6|red[1]                     ; hw_image_generator:inst6|red[7] ; yes                    ;
 ; hw_image_generator:inst6|red[0]                     ; hw_image_generator:inst6|red[7] ; yes                    ;
-; Number of user-specified and inferred latches = 31  ;                                 ;                        ;
+; hw_image_generator:inst6|gameT                      ; hw_image_generator:inst6|I[0]   ; yes                    ;
+; Number of user-specified and inferred latches = 25  ;                                 ;                        ;
 +-----------------------------------------------------+---------------------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
@@ -338,12 +332,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 77    ;
+; Total registers                              ; 109   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Clear ; 56    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 42    ;
+; Number of registers using Clock Enable       ; 74    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -353,12 +347,14 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; vga_controller:inst1|column[0]         ; 4       ;
-; vga_controller:inst1|column[31]        ; 4       ;
-; vga_controller:inst1|row[31]           ; 14      ;
-; vga_controller:inst1|row[0]            ; 5       ;
-; hw_image_generator:inst6|p1[0]         ; 26      ;
-; Total number of inverted registers = 5 ;         ;
+; vga_controller:inst1|row[31]           ; 20      ;
+; vga_controller:inst1|column[31]        ; 8       ;
+; vga_controller:inst1|row[0]            ; 8       ;
+; vga_controller:inst1|column[0]         ; 9       ;
+; hw_image_generator:inst6|columnNum[0]  ; 19      ;
+; hw_image_generator:inst6|columnNum[3]  ; 14      ;
+; hw_image_generator:inst6|p1[0]         ; 25      ;
+; Total number of inverted registers = 7 ;         ;
 +----------------------------------------+---------+
 
 
@@ -367,19 +363,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                    ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------+
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|A[0]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|B[0]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|C[0]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|D[0]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|E[0]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|F[1]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|G[1]         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|H[0]         ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|I[0]         ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|columnNum[3] ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|columnNum[2] ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |vga_with_hw_test_image|hw_image_generator:inst6|columnNum[0] ;
 ; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |vga_with_hw_test_image|vga_controller:inst1|v_count          ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |vga_with_hw_test_image|hw_image_generator:inst6|ha0          ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |vga_with_hw_test_image|hw_image_generator:inst6|red[7]       ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 2 LEs                ; 10 LEs                 ; No         ; |vga_with_hw_test_image|hw_image_generator:inst6|red[5]       ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |vga_with_hw_test_image|hw_image_generator:inst6|red[6]       ;
+; 27:1               ; 4 bits    ; 72 LEs        ; 8 LEs                ; 64 LEs                 ; No         ; |vga_with_hw_test_image|hw_image_generator:inst6|red[5]       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------+
 
 
@@ -817,23 +806,26 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 64                          ;
-; cycloneiii_ff         ; 77                          ;
-;     ENA               ; 42                          ;
-;     plain             ; 35                          ;
-; cycloneiii_lcell_comb ; 362                         ;
-;     arith             ; 21                          ;
-;         2 data inputs ; 21                          ;
-;     normal            ; 341                         ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 7                           ;
-;         2 data inputs ; 40                          ;
-;         3 data inputs ; 44                          ;
-;         4 data inputs ; 248                         ;
+; boundary_port         ; 37                          ;
+; cycloneiii_ff         ; 109                         ;
+;     CLR               ; 9                           ;
+;     ENA               ; 27                          ;
+;     ENA CLR           ; 47                          ;
+;     plain             ; 26                          ;
+; cycloneiii_lcell_comb ; 566                         ;
+;     arith             ; 117                         ;
+;         2 data inputs ; 109                         ;
+;         3 data inputs ; 8                           ;
+;     normal            ; 449                         ;
+;         0 data inputs ; 3                           ;
+;         1 data inputs ; 10                          ;
+;         2 data inputs ; 51                          ;
+;         3 data inputs ; 58                          ;
+;         4 data inputs ; 327                         ;
 ; cycloneiii_pll        ; 1                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 15.00                       ;
-; Average LUT depth     ; 9.39                        ;
+; Max LUT depth         ; 16.10                       ;
+; Average LUT depth     ; 10.94                       ;
 +-----------------------+-----------------------------+
 
 
@@ -852,7 +844,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
-    Info: Processing started: Tue Nov 16 14:01:00 2021
+    Info: Processing started: Mon Nov 22 20:12:18 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off vga_with_hw_test_image -c vga_with_hw_test_image
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -862,7 +854,7 @@ Info (12021): Found 2 design units, including 1 entities, in source file vga_con
     Info (12022): Found design unit 1: vga_controller-behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 52
     Info (12023): Found entity 1: vga_controller File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 28
 Info (12021): Found 2 design units, including 1 entities, in source file hw_image_generator.vhd
-    Info (12022): Found design unit 1: hw_image_generator-behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 74
+    Info (12022): Found design unit 1: hw_image_generator-behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 52
     Info (12023): Found entity 1: hw_image_generator File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vga_pll.vhd
     Info (12022): Found design unit 1: vga_pll-SYN File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_pll.vhd Line: 52
@@ -934,148 +926,89 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/altp
 Info (12128): Elaborating entity "altpll0_altpll" for hierarchy "altpll0:inst2|altpll:altpll_component|altpll0_altpll:auto_generated" File: c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/altpll.tdf Line: 898
 Info (12128): Elaborating entity "vga_controller" for hierarchy "vga_controller:inst1"
 Info (12128): Elaborating entity "hw_image_generator" for hierarchy "hw_image_generator:inst6"
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(43): used explicit default value for signal "ha1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 43
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(44): used explicit default value for signal "hb1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 44
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(45): used explicit default value for signal "hc1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 45
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(46): used explicit default value for signal "hd1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 46
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(47): used explicit default value for signal "he1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 47
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(48): used explicit default value for signal "hf1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 48
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(49): used explicit default value for signal "hg1" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 49
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(51): used explicit default value for signal "ha2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 51
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(52): used explicit default value for signal "hb2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 52
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(53): used explicit default value for signal "hc2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 53
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(54): used explicit default value for signal "hd2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 54
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(55): used explicit default value for signal "he2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 55
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(56): used explicit default value for signal "hf2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 56
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(57): used explicit default value for signal "hg2" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 57
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(59): used explicit default value for signal "ha3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 59
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(60): used explicit default value for signal "hb3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 60
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(61): used explicit default value for signal "hc3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 61
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(62): used explicit default value for signal "hd3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 62
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(63): used explicit default value for signal "he3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 63
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(64): used explicit default value for signal "hf3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 64
-Warning (10540): VHDL Signal Declaration warning at hw_image_generator.vhd(65): used explicit default value for signal "hg3" because signal was never assigned a value File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 65
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "red", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "green", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "blue", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "ha0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "hb0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "hc0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "hd0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "he0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "hf0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(85): inferring latch(es) for signal or variable "hg0", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "hg0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "hf0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "he0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "hd0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "hc0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "hb0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "ha0" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[0]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[1]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[2]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[3]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[4]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[5]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[6]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "blue[7]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[0]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[1]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[2]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[3]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[4]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[5]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[6]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "green[7]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[0]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[1]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[2]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[3]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[4]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[5]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[6]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Info (10041): Inferred latch for "red[7]" at hw_image_generator.vhd(85) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
+Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(68): inferring latch(es) for signal or variable "red", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(68): inferring latch(es) for signal or variable "green", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(68): inferring latch(es) for signal or variable "blue", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Warning (10631): VHDL Process Statement warning at hw_image_generator.vhd(68): inferring latch(es) for signal or variable "gameT", which holds its previous value in one or more paths through the process File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "gameT" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[0]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[1]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[2]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[3]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[4]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[5]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[6]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "blue[7]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[0]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[1]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[2]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[3]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[4]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[5]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[6]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "green[7]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[0]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[1]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[2]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[3]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[4]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[5]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[6]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Info (10041): Inferred latch for "red[7]" at hw_image_generator.vhd(68) File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
 Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[6]" merged with LATCH primitive "hw_image_generator:inst6|blue[6]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[6]" merged with LATCH primitive "hw_image_generator:inst6|blue[6]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[5]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[4]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[3]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[2]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[1]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[0]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[5]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[4]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[3]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[2]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[1]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[0]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[4]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[3]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[2]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[1]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[0]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-Warning (13012): Latch hw_image_generator:inst6|ha0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 35
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|hb0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 36
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[1] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|hc0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 37
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|hd0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 38
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|he0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 39
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|hf0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 40
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|hg0 has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 41
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|blue[7] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[3] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|blue[6] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|G[0] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 194
-Warning (13012): Latch hw_image_generator:inst6|blue[5] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[3] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|green[7] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[3] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
-Warning (13012): Latch hw_image_generator:inst6|red[7] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 85
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal hw_image_generator:inst6|columnNum[3] File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 182
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[5]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[4]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[3]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[2]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[1]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|red[0]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[5]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[4]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[3]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[2]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[1]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|green[0]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[4]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[3]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[2]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[1]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Info (13026): Duplicate LATCH primitive "hw_image_generator:inst6|blue[0]" merged with LATCH primitive "hw_image_generator:inst6|blue[5]" File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+Warning (13012): Latch hw_image_generator:inst6|blue[7] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Warning (13012): Latch hw_image_generator:inst6|blue[6] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Warning (13012): Latch hw_image_generator:inst6|blue[5] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Warning (13012): Latch hw_image_generator:inst6|green[7] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Warning (13012): Latch hw_image_generator:inst6|green[6] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Warning (13012): Latch hw_image_generator:inst6|red[7] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Warning (13012): Latch hw_image_generator:inst6|red[6] has unsafe behavior File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 68
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_controller:inst1|disp_ena File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_controller.vhd Line: 45
+Info (13000): Registers with preset signals will power-up high File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 167
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "n_blank" is stuck at VCC
     Warning (13410): Pin "n_sync" is stuck at GND
-    Warning (13410): Pin "ha1" is stuck at VCC
-    Warning (13410): Pin "hb1" is stuck at VCC
-    Warning (13410): Pin "hc1" is stuck at VCC
-    Warning (13410): Pin "hd1" is stuck at VCC
-    Warning (13410): Pin "he1" is stuck at VCC
-    Warning (13410): Pin "hf1" is stuck at VCC
-    Warning (13410): Pin "hg1" is stuck at VCC
-    Warning (13410): Pin "ha2" is stuck at VCC
-    Warning (13410): Pin "hc2" is stuck at VCC
-    Warning (13410): Pin "hb2" is stuck at VCC
-    Warning (13410): Pin "hd2" is stuck at VCC
-    Warning (13410): Pin "he2" is stuck at VCC
-    Warning (13410): Pin "hf2" is stuck at VCC
-    Warning (13410): Pin "hg2" is stuck at VCC
-    Warning (13410): Pin "hc3" is stuck at VCC
-    Warning (13410): Pin "hb3" is stuck at VCC
-    Warning (13410): Pin "hd3" is stuck at VCC
-    Warning (13410): Pin "he3" is stuck at VCC
-    Warning (13410): Pin "hf3" is stuck at VCC
-    Warning (13410): Pin "hg3" is stuck at VCC
-    Warning (13410): Pin "ha3" is stuck at VCC
 Info (286030): Timing-Driven Synthesis is running
+Critical Warning (18061): Ignored Power-Up Level option on the following registers
+    Critical Warning (18010): Register hw_image_generator:inst6|columnNum[3] will power up to High File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 167
+    Critical Warning (18010): Register hw_image_generator:inst6|columnNum[0] will power up to High File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 167
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 469 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 5 input pins
-    Info (21059): Implemented 59 output pins
-    Info (21061): Implemented 404 logic cells
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "moveBackward"
+Info (21057): Implemented 649 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 6 input pins
+    Info (21059): Implemented 31 output pins
+    Info (21061): Implemented 611 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 80 warnings
-    Info: Peak virtual memory: 4800 megabytes
-    Info: Processing ended: Tue Nov 16 14:01:12 2021
-    Info: Elapsed time: 00:00:12
-    Info: Total CPU time (on all processors): 00:00:27
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 27 warnings
+    Info: Peak virtual memory: 4802 megabytes
+    Info: Processing ended: Mon Nov 22 20:12:31 2021
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:29
 
 

@@ -15,7 +15,7 @@ ENTITY hw_image_generator IS
 		pixels_x					:	INTEGER := 1080;    --column that first color will persist until
 		movingBlockRowMin		:  INTEGER := 465;
 		movingBlockrowMax		:  INTEGER := 667;
-		movingBlockcolumnMin :  INTEGER := 179;
+		movingBlockcolumnMin :  INTEGER := 179; 
 		movingBlockcolumnMax :  INTEGER := 333;
 		rowMin   				:  INTEGER := 440;
 		rowMax   				:  INTEGER := 692;
@@ -26,43 +26,21 @@ ENTITY hw_image_generator IS
 		disp_ena			:	IN		STD_LOGIC;	--display enable ('1' = display time, '0' = blanking time)
 		row				:	IN		INTEGER;		--row pixel coordinate
 		column			:	IN		INTEGER;		--column pixel coordinate
-		reset				:  IN    STD_LOGIC;  --reset the game
+		reset				:  IN    STD_LOGIC;  --reset the game, button 4 input, pin_R24
 		clock				:  IN    STD_LOGIC;	--50Mhz clock
-		b1					:  IN    STD_LOGIC;  -- button 1 input, pin_M23
-		confirmButton	:	IN 	STD_LOGIC; 	-- button 2 input
+		moveFoward					:  IN    STD_LOGIC;  -- button 1 input, pin_M23
+		moveBackward	:	IN		STD_LOGIC; -- button 2 input, pin_M21
+		confirmButton	:	IN 	STD_LOGIC; 	-- button 3 input, pin_N21
+		
 		
 		-- 7 is the MSB, carries the most weight when changing colors.
-		ha0 : OUT STD_LOGIC := '1'; -- hex display HEX0
-		hb0 : OUT STD_LOGIC := '1';
-		hc0 : OUT STD_LOGIC := '1';
-		hd0 : OUT STD_LOGIC := '1';
-		he0 : OUT STD_LOGIC := '1';
-		hf0 : OUT STD_LOGIC := '1';
-		hg0 : OUT STD_LOGIC := '1';
-		
-		ha1 : OUT STD_LOGIC := '1'; -- hex display HEX1
-		hb1 : OUT STD_LOGIC := '1';
-		hc1 : OUT STD_LOGIC := '1';
-		hd1 : OUT STD_LOGIC := '1';
-		he1 : OUT STD_LOGIC := '1';
-		hf1 : OUT STD_LOGIC := '1';
-		hg1 : OUT STD_LOGIC := '1';
-		
-		ha2 : OUT STD_LOGIC := '1'; -- hex display HEX2
-		hb2 : OUT STD_LOGIC := '1';
-		hc2 : OUT STD_LOGIC := '1';
-		hd2 : OUT STD_LOGIC := '1';
-		he2 : OUT STD_LOGIC := '1';
-		hf2 : OUT STD_LOGIC := '1';
-		hg2 : OUT STD_LOGIC := '1';
-		
-		ha3 : OUT STD_LOGIC := '1'; -- hex display HEX3
-		hb3 : OUT STD_LOGIC := '1';
-		hc3 : OUT STD_LOGIC := '1';
-		hd3 : OUT STD_LOGIC := '1';
-		he3 : OUT STD_LOGIC := '1';
-		hf3 : OUT STD_LOGIC := '1';
-		hg3 : OUT STD_LOGIC := '1';
+		--ha0 : OUT STD_LOGIC; -- hex display HEX0
+		--hb0 : OUT STD_LOGIC;
+		--hc0 : OUT STD_LOGIC;
+		--hd0 : OUT STD_LOGIC;
+		--he0 : OUT STD_LOGIC;
+		--hf0 : OUT STD_LOGIC;
+		--hg0 : OUT STD_LOGIC;
 		
 		r1			:	OUT 	STD_LOGIC;
 		r2			:	OUT	STD_LOGIC;
@@ -72,17 +50,22 @@ ENTITY hw_image_generator IS
 END hw_image_generator;
 
 ARCHITECTURE behavior OF hw_image_generator IS
+	signal p1w : STD_LOGIC := '0';
+	signal p2w : STD_LOGIC := '0';
+	signal gameT : STD_LOGIC := '0';
 	BEGIN
+	--p1win <= p1w;
+	--p2win <= p2w;
+	--gameTie <= gameT;
 		-- led confirmations on board to show user button presses.
-		r1 <= Not b1;
+		r1 <= Not moveFoward;
 		r2 <= Not confirmButton;
-	
 	--------------------------------------------
 	-- PROCESS
 	-- Includes VGA and Game code.
 	-- Will display a playable version of classic tic-tac-toe.
 	--------------------------------------------
-	PROCESS(disp_ena, row, column, clock)
+	PROCESS(disp_ena, row, column, clock, p1w, p2w, gameT, reset)
 		VARIABLE columnNum 						: 	INTEGER range 0 to 9; -- loops through A -> I should work as a counter
 		VARIABLE buttonState 					: 	BOOLEAN := false;
 		VARIABLE buttonStateConfirm 			: 	BOOLEAN := false;
@@ -90,8 +73,10 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		VARIABLE A, B, C, D, E, F, G, H, I	: 	INTEGER := 0;
 		VARIABLE p1									:	INTEGER := 1; -- player 1 is active at program begin
 		VARIABLE p2									:	INTEGER := 0; -- player 2 is inactive at program begin
+		VARIABLE buttonConfirmCounter			:	INTEGER := 0; -- counts number of times the button is confirmed
 	BEGIN
-	
+		p1w <= '0';
+		p2w <= '0';
 		IF(disp_ena = '1') THEN		--display time
 			
 			---------------------------------------------------------------------
@@ -180,62 +165,74 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		
 		---------------------------------------------------START button logic
 				IF rising_edge(clock) THEN
-					IF b1 = '0' and buttonState = false THEN -- button is 0 when pressed
+					IF moveFoward = '0' and buttonState = false THEN -- button is 0 when pressed
 						buttonState := not buttonState; -- buttonState logic to prevent button bouncing
 						columnNum := columnNum + 1;
 						IF columnNum > 8 THEN
 								columnNum := 0;
 							END IF;
-						ELSIF b1 = '1' and buttonState = true THEN
+						ELSIF moveFoward = '1' and buttonState = true THEN
 							buttonState := not buttonState;
-					END IF; -- b1 if statement	
+					END IF; -- moveFoward if statement	
 				END IF; -- end rising_edge if statement
 				
 				IF rising_edge(clock) THEN
 				IF confirmButton = '0' and buttonStateConfirm = false THEN
 					buttonStateConfirm := not buttonStateConfirm;
 						-- player 1's turn
+					--	if(confirmButton = '0') then
+							--columnNum := 0;
+						--end if;
 						IF(columnNum = 0 AND p1 = 1 AND A = 0) THEN
+							buttonConfirmCounter := buttonConfirmCounter + 1;
 							A := 1;
 							p2 := 1;
 							p1 := 0;	
 						END IF;
 						IF(columnNum = 1 AND p1 = 1  AND B = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							B := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF(columnNum = 2 AND p1 = 1  AND C = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							C := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF (columnNum = 3 AND p1 = 1  AND D = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							D := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF (columnNum = 4 AND p1 = 1  AND E = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							E := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF(columnNum = 5 AND p1 = 1  AND F = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							F := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF(columnNum = 6 AND p1 = 1  AND G = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							G := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF(columnNum = 7 AND p1 = 1  AND H = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							H := 1;
 							p2 := 1;
 							p1 := 0;
 						END IF;
 						IF(columnNum = 8 AND p1 = 1  AND I = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							I := 1;
 							p2 := 1;
 							p1 := 0;
@@ -243,58 +240,69 @@ ARCHITECTURE behavior OF hw_image_generator IS
 						
 						-- player 2's turn
 						IF(columnNum = 0 AND p2 = 1 AND A = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							A := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF(columnNum = 1 AND p2 = 1 AND B = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							B := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF(columnNum = 2 AND p2 = 1 AND C = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							C := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF (columnNum = 3 AND p2 = 1 AND D = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							D := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF (columnNum = 4 AND p2 = 1 AND E = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							E := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF(columnNum = 5 AND p2 = 1 AND F = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							F := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF(columnNum = 6 AND p2 = 1 AND G = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							G := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF(columnNum = 7 AND p2 = 1 AND H = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							H := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
 						IF(columnNum = 8 AND p2 = 1 AND I = 0) THEN
+						buttonConfirmCounter := buttonConfirmCounter + 1;
 							I := 2;
 							p1 := 1;
 							p2 := 0;
 						END IF;
+							if(confirmButton = '0') then
+							columnNum := 9;
+							end if;
 					ELSIF confirmButton = '1' and buttonStateConfirm = true THEN
 						buttonStateConfirm := not buttonState;
 					END IF; --confirmButton if statement
 				END IF; -- end 2nd rising clock edge
 				
-			IF rising_edge(clock) THEN
-				IF reset = '0' THEN-- and resetState = false THEN -- button is 0 when pressed
-					--resetState := not resetState; -- reset logic to prevent button bouncing
+				--IF rising_edge(clock) THEN
+				IF reset = '0' THEN
 					A := 0;
 					B := 0;
 					C := 0;
@@ -307,10 +315,14 @@ ARCHITECTURE behavior OF hw_image_generator IS
 					p1 := 1;
 					p2 := 0;
 					columnNum := 9;
+					buttonConfirmCounter := 0;
+					p1w <= '0';
+					p2w <= '0';
+					gameT <= '0';
 					--ELSIF reset = '1' and resetState = true THEN
 					--resetState := not resetState;
 				END IF; -- reset if statement	
-			END IF; -- end rising_edge if statement
+			--END IF;
 		--------------------------------------------------- END button logic
 
 		--------------------------------------------------- START player 1 logic
@@ -404,10 +416,6 @@ ARCHITECTURE behavior OF hw_image_generator IS
 					green	<= (7 => '1',
 						OTHERS => '0');
 					blue <= (OTHERS => '0');
-					--ha3 <= '1'; hb3 <= '0'; hc3 <= '0'; hd3 <= '0'; he3 <= '0'; hf3 <= '0'; hg3 <= '1';
-					--ha2 <= '0'; hb2 <= '1'; hc2 <= '0'; hd2 <= '0'; he2 <= '1'; hf2 <= '0'; hg2 <= '0';
-					--ha1 <= '0'; hb1 <= '1'; hc1 <= '1'; hd1 <= '0'; he1 <= '0'; hf1 <= '0'; hg1 <= '0';
-					--ha0 <= '1'; hb0 <= '0'; hc0 <= '0'; hd0 <= '0'; he0 <= '0'; hf0 <= '1'; hg0 <= '0';
 				END IF;
 			END IF; -- end if A = 2
 			
@@ -487,13 +495,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			---------------------------------------------------------- START Moving box to select square
 		-- A
 		IF(columnNum = 0) THEN -- checks if box is in A's position
-			ha0 <= '1';
-			hb0 <= '0';
-			hc0 <= '0';
-			hd0 <= '1';
-			he0 <= '1';
-			hf0 <= '1';
-			hg0 <= '1';
+			--ha0 <= '1';
+			--hb0 <= '0';
+			--hc0 <= '0';
+			--hd0 <= '1';
+			--he0 <= '1';
+			--hf0 <= '1';
+			--hg0 <= '1';
 				IF(row > movingBlockrowMin AND row < movingBlockrowMax AND column > movingBlockcolumnMin AND column < movingBlockcolumnMax) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -504,13 +512,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 				END IF;
 		-- B
 		ELSIF(columnNum = 1) THEN -- checks if box is in B's position
-			ha0 <= '0';
-			hb0 <= '0';
-			hc0 <= '1';
-			hd0 <= '0';
-			he0 <= '0';
-			hf0 <= '1';
-			hg0 <= '0';
+			--ha0 <= '0';
+			--hb0 <= '0';
+			--hc0 <= '1';
+			--hd0 <= '0';
+			--he0 <= '0';
+			--hf0 <= '1';
+			--hg0 <= '0';
 				IF(row > (movingBlockrowMin + 394) AND row < (movingBlockrowMax + 394) AND column > movingBlockcolumnMin AND column < movingBlockcolumnMax) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -522,13 +530,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- C
 		ELSIF(columnNum = 2) THEN -- checks if box is in C's position
-			ha0 <= '0';
-			hb0 <= '0';
-			hc0 <= '0';
-			hd0 <= '0';
-			he0 <= '1';
-			hf0 <= '1';
-			hg0 <= '0';
+			--ha0 <= '0';
+			--hb0 <= '0';
+			--hc0 <= '0';
+			--hd0 <= '0';
+			--he0 <= '1';
+			--hf0 <= '1';
+			--hg0 <= '0';
 				IF(row > (movingBlockrowMin + 788) AND row < (movingBlockrowMax + 788) AND column > movingBlockcolumnMin AND column < movingBlockcolumnMax) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -540,13 +548,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- D
 		ELSIF(columnNum = 3) THEN -- checks if box is in D's position
-			ha0 <= '1';
-			hb0 <= '0';
-			hc0 <= '0';
-			hd0 <= '1';
-			he0 <= '1';
-			hf0 <= '0';
-			hg0 <= '0';
+			--ha0 <= '1';
+			--hb0 <= '0';
+			--hc0 <= '0';
+			--hd0 <= '1';
+			--he0 <= '1';
+			--hf0 <= '0';
+			--hg0 <= '0';
 				IF(row > movingBlockrowMin AND row < movingBlockrowMax AND column > (movingBlockcolumnMin + 284) AND column < (movingBlockcolumnMax + 284)) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -558,13 +566,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- E
 		ELSIF(columnNum = 4) THEN -- checks if box is in E's position
-			ha0 <= '0';
-			hb0 <= '1';
-			hc0 <= '0';
-			hd0 <= '0';
-			he0 <= '1';
-			hf0 <= '0';
-			hg0 <= '0';
+			--ha0 <= '0';
+			--hb0 <= '1';
+			--hc0 <= '0';
+			--hd0 <= '0';
+			--he0 <= '1';
+			--hf0 <= '0';
+			--hg0 <= '0';
 				IF(row > (movingBlockrowMin + 394) AND row < (movingBlockrowMax + 394) AND column > (movingBlockcolumnMin + 284) AND column < (movingBlockcolumnMax + 284)) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -576,13 +584,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- F
 		ELSIF(columnNum = 5) THEN -- checks if box is in F's position
-			ha0 <= '0';
-			hb0 <= '1';
-			hc0 <= '0';
-			hd0 <= '0';
-			he0 <= '0';
-			hf0 <= '0';
-			hg0 <= '0';
+			--ha0 <= '0';
+			--hb0 <= '1';
+			--hc0 <= '0';
+			--hd0 <= '0';
+			--he0 <= '0';
+			--hf0 <= '0';
+			--hg0 <= '0';
 				IF(row > (movingBlockrowMin + 788) AND row < (movingBlockrowMax + 788) AND column > (movingBlockcolumnMin + 284) AND column < (movingBlockcolumnMax + 284)) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -594,13 +602,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- G
 		ELSIF(columnNum = 6) THEN -- checks if box is in G's position
-			ha0 <= '0';
-			hb0 <= '0';
-			hc0 <= '0';
-			hd0 <= '1';
-			he0 <= '1';
-			hf0 <= '1';
-			hg0 <= '1';
+			--ha0 <= '0';
+			--hb0 <= '0';
+			--hc0 <= '0';
+			--hd0 <= '1';
+			--he0 <= '1';
+			--hf0 <= '1';
+			--hg0 <= '1';
 				IF(row > movingBlockrowMin AND row < movingBlockrowMax AND column > (movingBlockcolumnMin + 568) AND column < (movingBlockcolumnMax + 568)) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -612,13 +620,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- H
 		ELSIF(columnNum = 7) THEN -- checks if box is in H's position
-			ha0 <= '0';
-			hb0 <= '0';
-			hc0 <= '0';
-			hd0 <= '0';
-			he0 <= '0';
-			hf0 <= '0';
-			hg0 <= '0';
+			--ha0 <= '0';
+			--hb0 <= '0';
+			--hc0 <= '0';
+			--hd0 <= '0';
+			--he0 <= '0';
+			--hf0 <= '0';
+			--hg0 <= '0';
 				IF(row > (movingBlockrowMin + 394) AND row < (movingBlockrowMax + 394) AND column > (movingBlockcolumnMin + 568) AND column < (movingBlockcolumnMax + 568)) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -630,13 +638,13 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			
 		-- I
 		ELSIF(columnNum = 8) THEN -- checks if box is in I's position
-			ha0 <= '0';
-			hb0 <= '0';
-			hc0 <= '0';
-			hd0 <= '0';
-			he0 <= '1';
-			hf0 <= '0';
-			hg0 <= '0';
+			--ha0 <= '0';
+			--hb0 <= '0';
+			--hc0 <= '0';
+			--hd0 <= '0';
+			--he0 <= '1';
+			--hf0 <= '0';
+			--hg0 <= '0';
 				IF(row > (movingBlockrowMin + 788) AND row < (movingBlockrowMax + 788) AND column > (movingBlockcolumnMin + 568) AND column < (movingBlockcolumnMax + 568)) THEN
 					red <= (7 => '1',
 							  OTHERS => '0');
@@ -653,5 +661,418 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			green <= (OTHERS => '0');
 			blue <= (OTHERS => '0');
 		END IF; -- disp_enable if statement
+		
+		---------------------------------------------------------------------
+		--------------------------- Win Conditions --------------------------
+		---------------------------------------------------------------------
+if (a = 1 AND b = 1 AND c = 1) Then 
+p1w <= '1';
+end if;
+if (a = 1 AND d = 1 AND g = 1) Then 
+p1w <= '1';
+end if;
+if (b = 1 AND e = 1 AND h = 1) Then 
+p1w <= '1';
+end if;
+if (d=1 AND e=1 AND f = 1) Then 
+p1w <= '1';
+end if;
+if (a=1 AND e=1 AND i =1) Then
+p1w <= '1';
+end if;
+if (g=1 AND h=1 and i=1) Then
+p1w <= '1';
+end if;
+if (g=1 AND e=1 AND c=1) Then 
+p1w <= '1';
+end if;
+if (c=1 AND f=1 AND i=1) Then 
+p1w <= '1';
+end if;
+if (a=2 AND b =2 AND c = 2) Then 
+p2w <= '1';
+end if;
+if (a=2 AND d =2 AND g = 2) Then 
+p2w <= '1';
+end if;
+if (b=2 AND e =2 AND h = 2) Then 
+p2w <= '1';
+end if;
+if (d=2 AND e=2 AND f = 2) Then 
+p2w <= '1';
+end if;
+if (a=2 AND e=2 AND i =2) Then
+p2w <= '1';
+end if;
+if (g=2 AND h=2 and i=2) Then
+p2w <= '1';
+end if;
+if (g=2 AND e=2 AND c=2) Then 
+p2w <= '1';
+end if;
+if (c=2 AND f=2 AND i=2) Then 
+p2w <= '1';
+end if;
+if(p2w = '0' AND p1w = '0' AND buttonConfirmCounter = 9) THEN
+gameT <= '1';
+end if;
+		---------------------------------------------------------------------
+		--------------------------- Winner Display --------------------------
+		---------------------------------------------------------------------		
+		if (gameT = '1' AND buttonConfirmCounter = 9 AND p1w = '0' AND p2w = '0') then
+		------------------------------------------------------------------- T START
+	IF(row > 80 AND row < 140 AND column < 25 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+				IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+			------------------------------------------------------------------- T END
+			
+			------------------------------------------------------------------- I START
+				IF(row > 160 AND row < 180 AND column < 25 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+				IF(row > 160 AND row < 180 AND column < 100 AND column > 40) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+			------------------------------------------------------------------- I END
+			
+			------------------------------------------------------------------- E START
+			IF(row > 200 AND row < 220 AND column < 100 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+			IF(row > 219 AND row < 260 AND column < 20 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+			IF(row > 219 AND row < 260 AND column < 57 AND column > 37) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+			IF(row > 219 AND row < 260 AND column < 100 AND column > 80) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+			------------------------------------------------------------------- E END
+end if;
+if (p1w = '1') then
+	------------------------------------------------------------------- Red cube
+	IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (OTHERS => '0');
+				blue <= (OTHERS => '0');
+			END IF;
+	------------------------------------------------------------------- START W
+	IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+	IF(row > 119 AND row < 140 AND column < 100 AND column > 80) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 139 AND row < 160 AND column < 100 AND column > 30) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 159 AND row < 180 AND column < 100 AND column > 80) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 179 AND row < 200 AND column < 100 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END W
+	
+	------------------------------------------------------------------- START I
+	IF(row > 220 AND row < 240 AND column < 100 AND column > 40) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+		IF(row > 220 AND row < 240 AND column < 25 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END I
+	
+	------------------------------------------------------------------- START N
+	IF(row > 260 AND row < 280 AND column < 100 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 279 AND row < 320 AND column < 25 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 319 AND row < 340 AND column < 100 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END N
+	
+	------------------------------------------------------------------- START S
+	IF(row > 360 AND row < 420 AND column < 26 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 360 AND row < 380 AND column < 50 AND column > 25) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 360 AND row < 420 AND column < 60 AND column > 39) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 400 AND row < 420 AND column < 81 AND column > 59) THEN
+	red <= (6 => '1',
+			  OTHERS => '0');
+	green	<= (6 => '1',
+				 OTHERS => '0');
+	blue <= (6 => '1',
+				OTHERS => '0');
+	END IF;
+	IF(row > 360 AND row < 420 AND column < 100 AND column > 80) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END S
+			--end if;
+ELSIF (p2w = '1') THEN
+IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
+				red <= (OTHERS => '0');
+				green	<= (6 => '1',
+							OTHERS => '0');
+				blue <= (OTHERS => '0');
+	END IF;
+	--END IF;
+
+	------------------------------------------------------------------- START W
+	IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
+				red <= (6 => '1',
+						  OTHERS => '0');
+				green	<= (6 => '1',
+							 OTHERS => '0');
+				blue <= (6 => '1',
+							OTHERS => '0');
+			END IF;
+	IF(row > 119 AND row < 140 AND column < 100 AND column > 80) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 139 AND row < 160 AND column < 100 AND column > 30) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 159 AND row < 180 AND column < 100 AND column > 80) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 179 AND row < 200 AND column < 100 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END W
+	
+	------------------------------------------------------------------- START I
+	IF(row > 220 AND row < 240 AND column < 100 AND column > 40) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+		IF(row > 220 AND row < 240 AND column < 25 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END I
+	
+	------------------------------------------------------------------- START N
+	IF(row > 260 AND row < 280 AND column < 100 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 279 AND row < 320 AND column < 25 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 319 AND row < 340 AND column < 100 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END N
+	
+	------------------------------------------------------------------- START S
+	IF(row > 360 AND row < 420 AND column < 26 AND column > 5) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 360 AND row < 380 AND column < 50 AND column > 25) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 360 AND row < 420 AND column < 60 AND column > 39) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	IF(row > 400 AND row < 420 AND column < 81 AND column > 59) THEN
+	red <= (6 => '1',
+			  OTHERS => '0');
+	green	<= (6 => '1',
+				 OTHERS => '0');
+	blue <= (6 => '1',
+				OTHERS => '0');
+	END IF;
+	IF(row > 360 AND row < 420 AND column < 100 AND column > 80) THEN
+		red <= (6 => '1',
+				  OTHERS => '0');
+		green	<= (6 => '1',
+					 OTHERS => '0');
+		blue <= (6 => '1',
+					OTHERS => '0');
+	END IF;
+	------------------------------------------------------------------- END S
+end if;
 	END PROCESS;
 END behavior;
