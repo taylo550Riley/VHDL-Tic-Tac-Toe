@@ -28,7 +28,7 @@ ENTITY hw_image_generator IS
 		column			:	IN		INTEGER;		--column pixel coordinate
 		reset				:  IN    STD_LOGIC;  --reset the game, button 4 input, pin_R24
 		clock				:  IN    STD_LOGIC;	--50Mhz clock
-		moveFoward					:  IN    STD_LOGIC;  -- button 1 input, pin_M23
+		moveFoward		:  IN    STD_LOGIC;  -- button 1 input, pin_M23
 		moveBackward	:	IN		STD_LOGIC; -- button 2 input, pin_M21
 		confirmButton	:	IN 	STD_LOGIC; 	-- button 3 input, pin_N21
 		
@@ -50,6 +50,7 @@ ENTITY hw_image_generator IS
 END hw_image_generator;
 
 ARCHITECTURE behavior OF hw_image_generator IS
+	--signal rst : STD_LOGIC := '0';
 	signal p1w : STD_LOGIC := '0';
 	signal p2w : STD_LOGIC := '0';
 	signal gameT : STD_LOGIC := '0';
@@ -67,7 +68,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 	--------------------------------------------
 	PROCESS(disp_ena, row, column, clock, p1w, p2w, gameT, reset)
 		VARIABLE columnNum 						: 	INTEGER range 0 to 9; -- loops through A -> I should work as a counter
-		VARIABLE buttonState 					: 	BOOLEAN := false;
+		VARIABLE moveForwardButtonState 		: 	BOOLEAN := false;
+		VARIABLE moveBackwardButtonState		:	BOOLEAN := false;
 		VARIABLE buttonStateConfirm 			: 	BOOLEAN := false;
 		VARIABLE resetState 						: 	BOOLEAN := false;
 		VARIABLE A, B, C, D, E, F, G, H, I	: 	INTEGER := 0;
@@ -77,6 +79,7 @@ ARCHITECTURE behavior OF hw_image_generator IS
 	BEGIN
 		p1w <= '0';
 		p2w <= '0';
+		--rst <= '0';
 		IF(disp_ena = '1') THEN		--display time
 			
 			---------------------------------------------------------------------
@@ -86,9 +89,19 @@ ARCHITECTURE behavior OF hw_image_generator IS
 			-- row will be filled up to 1920 pixels (the x-axis)
 			-- column will be filled up to 1080 pixels (the y-axis)
 			IF(row < pixels_y AND column < pixels_x) THEN
-				red <= (OTHERS => '1');
-				green	<= (OTHERS => '1');
-				blue <= (OTHERS => '1');
+				red <= (OTHERS => '0');
+				green	<= (7 => '1',
+							6 => '1',
+							5 => '1',
+							4 => '1',
+							3 => '1',
+							OTHERS => '0');
+				blue <= (7 => '1',
+							6 => '1',
+							5 => '1',
+							4 => '1',
+							3 => '1',
+							OTHERS => '0');
 			END IF;
 				
 			---------------------------------------------------------------------
@@ -165,24 +178,32 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		
 		---------------------------------------------------START button logic
 				IF rising_edge(clock) THEN
-					IF moveFoward = '0' and buttonState = false THEN -- button is 0 when pressed
-						buttonState := not buttonState; -- buttonState logic to prevent button bouncing
+					IF moveFoward = '0' and moveForwardButtonState = false THEN -- button is 0 when pressed
+						moveForwardButtonState := not moveForwardButtonState; -- moveForwardButtonState logic to prevent button bouncing
 						columnNum := columnNum + 1;
 						IF columnNum > 8 THEN
 								columnNum := 0;
 							END IF;
-						ELSIF moveFoward = '1' and buttonState = true THEN
-							buttonState := not buttonState;
-					END IF; -- moveFoward if statement	
+						ELSIF moveFoward = '1' and moveForwardButtonState = true THEN
+							moveForwardButtonState := not moveForwardButtonState;
+							END IF;
+						IF moveBackward = '0' and moveBackwardButtonState = false THEN -- button is 0 when pressed
+						moveBackwardButtonState := not moveBackwardButtonState; -- moveBackwardButtonState logic to prevent button bouncing
+							IF columnNum = 0 THEN
+								columnNum := 9;
+							END IF;
+							IF columnNum > 0 THEN
+								columnNum := columnNum - 1;
+							END IF;
+						ELSIF moveBackward = '1' and moveBackwardButtonState = true THEN
+							moveBackwardButtonState := not moveBackwardButtonState;
+					END IF; -- moveBackward if statement	
 				END IF; -- end rising_edge if statement
 				
 				IF rising_edge(clock) THEN
 				IF confirmButton = '0' and buttonStateConfirm = false THEN
 					buttonStateConfirm := not buttonStateConfirm;
 						-- player 1's turn
-					--	if(confirmButton = '0') then
-							--columnNum := 0;
-						--end if;
 						IF(columnNum = 0 AND p1 = 1 AND A = 0) THEN
 							buttonConfirmCounter := buttonConfirmCounter + 1;
 							A := 1;
@@ -297,7 +318,7 @@ ARCHITECTURE behavior OF hw_image_generator IS
 							columnNum := 9;
 							end if;
 					ELSIF confirmButton = '1' and buttonStateConfirm = true THEN
-						buttonStateConfirm := not buttonState;
+						buttonStateConfirm := not buttonStateConfirm;
 					END IF; --confirmButton if statement
 				END IF; -- end 2nd rising clock edge
 				
@@ -319,8 +340,6 @@ ARCHITECTURE behavior OF hw_image_generator IS
 					p1w <= '0';
 					p2w <= '0';
 					gameT <= '0';
-					--ELSIF reset = '1' and resetState = true THEN
-					--resetState := not resetState;
 				END IF; -- reset if statement	
 			--END IF;
 		--------------------------------------------------- END button logic
@@ -329,6 +348,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (A = 1) THEN
 			IF(row > rowMin AND row < rowMax AND column > columnMin AND column < columnMax) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -337,6 +358,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (B = 1) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > columnMin AND column < columnMax) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -346,6 +369,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (C = 1) THEN
 			IF(row > (rowMin + 788) AND row < (rowMax + 788) AND column > columnMin AND column < columnMax) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -355,6 +380,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (D = 1) THEN
 			IF(row > rowMin AND row < rowMax AND column > (columnMin + 284) AND column < (columnMax + 284)) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -364,6 +391,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (E = 1) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > (columnMin + 284) AND column < (columnMax + 284)) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -373,6 +402,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (F = 1) THEN
 			IF(row > (rowMin + 788) AND row < (rowMax + 788) AND column > (columnMin + 284) AND column < (columnMax + 284)) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -382,6 +413,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (G = 1) THEN
 			IF(row > rowMin AND row < rowMax AND column > (columnMin + 568) AND column < (columnMax + 568)) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -391,6 +424,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (H = 1) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > (columnMin + 568) AND column < (columnMax + 568)) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -400,6 +435,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		IF (I = 1) THEN
 			IF(row > (rowMin + 788) AND row < (rowMax + 788) AND column > (columnMin + 568) AND column < (columnMax + 568)) THEN
 					red <= (7 => '1',
+								6 => '1',
+								5 => '1',
 							  OTHERS => '0');
 					green	<= (OTHERS => '0');
 					blue <= (OTHERS => '0');
@@ -412,82 +449,109 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		---------------------------------------------------------- START player 2 logic
 		IF (A = 2) THEN
 			IF(row > rowMin AND row < rowMax AND column > columnMin AND column < columnMax) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if A = 2
 			
 		IF (B = 2) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > columnMin AND column < columnMax) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if B = 2
 			
 		IF (C = 2) THEN
 			IF(row > (rowMin + 788) AND row < (rowMax + 788) AND column > columnMin AND column < columnMax) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if C = 2
 			
 		IF (D = 2) THEN
 			IF(row > rowMin AND row < rowMax AND column > (columnMin + 284) AND column < (columnMax + 284)) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if D = 2
 			
 		IF (E = 2) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > (columnMin + 284) AND column < (columnMax + 284)) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if E = 2
 
 		IF (F = 2) THEN
 			IF(row > (rowMin + 788) AND row < (rowMax + 788) AND column > (columnMin + 284) AND column < (columnMax + 284)) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if F = 2
 			
 		IF (G = 2) THEN
 			IF(row > rowMin AND row < rowMax AND column > (columnMin + 568) AND column < (columnMax + 568)) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if G = 2
 			
 		IF (H = 2) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > (columnMin + 568) AND column < (columnMax + 568)) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if H = 2
 			
 		IF (I = 2) THEN
 			IF(row > (rowMin + 788) AND row < (rowMax + 788) AND column > (columnMin + 568) AND column < (columnMax + 568)) THEN
-					red <= (OTHERS => '0');
-					green	<= (7 => '1',
-						OTHERS => '0');
-					blue <= (OTHERS => '0');
+					red <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
+					green	<= (OTHERS => '0');
+					blue <= (7 => '1',
+								6 => '1',
+								OTHERS => '0');
 				END IF;
 			END IF; -- end if I = 2
 			---------------------------------------------------------- END player 2 logic
@@ -716,6 +780,7 @@ end if;
 if(p2w = '0' AND p1w = '0' AND buttonConfirmCounter = 9) THEN
 gameT <= '1';
 end if;
+
 		---------------------------------------------------------------------
 		--------------------------- Winner Display --------------------------
 		---------------------------------------------------------------------		
@@ -794,9 +859,11 @@ end if;
 			------------------------------------------------------------------- E END
 end if;
 if (p1w = '1') then
-	------------------------------------------------------------------- Red cube
+	------------------------------------------------------------------- Red win cube
 	IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
-				red <= (6 => '1',
+				red <= (7 => '1',
+							6 => '1',
+							5 => '1',
 						  OTHERS => '0');
 				green	<= (OTHERS => '0');
 				blue <= (OTHERS => '0');
@@ -932,16 +999,19 @@ if (p1w = '1') then
 					OTHERS => '0');
 	END IF;
 	------------------------------------------------------------------- END S
-			--end if;
+	
+	------------------------------------------------------------------- Purple win cube
 ELSIF (p2w = '1') THEN
 IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
-				red <= (OTHERS => '0');
-				green	<= (6 => '1',
+				red <= (7 => '1',
+							6 => '1',
 							OTHERS => '0');
-				blue <= (OTHERS => '0');
+				green	<= (OTHERS => '0');
+				blue <= (7 => '1',
+							6 => '1',
+							OTHERS => '0');
 	END IF;
-	--END IF;
-
+	
 	------------------------------------------------------------------- START W
 	IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
 				red <= (6 => '1',
@@ -1074,5 +1144,8 @@ IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
 	END IF;
 	------------------------------------------------------------------- END S
 end if;
+	--if ( p1w = '1' OR p2w = '1' Or gameT = '1') then
+	--rst <= '0' after 1000000000000000000 ns;
+	--end if;
 	END PROCESS;
 END behavior;
