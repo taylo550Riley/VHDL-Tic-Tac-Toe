@@ -1,5 +1,5 @@
 Fitter report for vga_with_hw_test_image
-Tue Nov 23 14:09:24 2021
+Tue Nov 30 11:12:00 2021
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
 
 
@@ -68,7 +68,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Tue Nov 23 14:09:24 2021       ;
+; Fitter Status                      ; Successful - Tue Nov 30 11:12:00 2021       ;
 ; Quartus Prime Version              ; 16.1.0 Build 196 10/24/2016 SJ Lite Edition ;
 ; Revision Name                      ; vga_with_hw_test_image                      ;
 ; Top-level Entity Name              ; vga_with_hw_test_image                      ;
@@ -160,7 +160,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.5%      ;
+;     Processors 2-4         ;   0.4%      ;
 +----------------------------+-------------+
 
 
@@ -1778,9 +1778,9 @@ Info (176353): Automatically promoted node altpll0:inst2|altpll:altpll_component
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G3
 Info (176353): Automatically promoted node clock~input (placed in PIN AG14 (CLK15, DIFFCLK_6p))
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G18
-Info (176353): Automatically promoted node hw_image_generator:inst6|red[7]~45  File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 69
+Info (176353): Automatically promoted node hw_image_generator:inst6|red[7]~45  File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 66
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock
-Info (176353): Automatically promoted node hw_image_generator:inst6|I[0]~0  File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 203
+Info (176353): Automatically promoted node hw_image_generator:inst6|I[0]~0  File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 199
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock
     Info (176356): Following destination nodes may be non-global or may not use global or regional clocks
         Info (176357): Destination node hw_image_generator:inst6|gameT File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/hw_image_generator.vhd Line: 56
@@ -1788,7 +1788,7 @@ Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
 Warning (15064): PLL "altpll0:inst2|altpll:altpll_component|altpll0_altpll:auto_generated|pll1" output port clk[0] feeds output pin "pixel_clk~output" via non-dedicated routing -- jitter performance depends on switching rate of other design elements. Use PLL dedicated clock outputs to ensure jitter performance File: C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/db/altpll0_altpll.v Line: 47
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:02
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1802,7 +1802,7 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.10 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.09 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -1817,10 +1817,10 @@ Warning (169177): 6 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2
     Info (169178): Pin moveBackward uses I/O standard 3.3-V LVTTL at M21
 Info (144001): Generated suppressed messages file C:/Users/Riley/Documents/ECE287/tic-tac-toe/vga/vga_with_hw_test_image_v1_1_restored/vga_with_hw_test_image.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 13 warnings
-    Info: Peak virtual memory: 5697 megabytes
-    Info: Processing ended: Tue Nov 23 14:09:25 2021
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Peak virtual memory: 5700 megabytes
+    Info: Processing ended: Tue Nov 30 11:12:00 2021
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:17
 
 
 +----------------------------+

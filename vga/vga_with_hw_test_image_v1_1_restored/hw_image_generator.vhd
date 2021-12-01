@@ -55,9 +55,6 @@ ARCHITECTURE behavior OF hw_image_generator IS
 	signal p2w : STD_LOGIC := '0';
 	signal gameT : STD_LOGIC := '0';
 	BEGIN
-	--p1win <= p1w;
-	--p2win <= p2w;
-	--gameTie <= gameT;
 		-- led confirmations on board to show user button presses.
 		r1 <= Not moveFoward;
 		r2 <= Not confirmButton;
@@ -67,7 +64,7 @@ ARCHITECTURE behavior OF hw_image_generator IS
 	-- Will display a playable version of classic tic-tac-toe.
 	--------------------------------------------
 	PROCESS(disp_ena, row, column, clock, p1w, p2w, gameT, reset)
-		VARIABLE columnNum 						: 	INTEGER range 0 to 9; -- loops through A -> I should work as a counter
+		VARIABLE columnNum 						: 	INTEGER range 0 to 9; -- loops through A -> I, works as a counter
 		VARIABLE moveForwardButtonState 		: 	BOOLEAN := false;
 		VARIABLE moveBackwardButtonState		:	BOOLEAN := false;
 		VARIABLE buttonStateConfirm 			: 	BOOLEAN := false;
@@ -77,9 +74,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		VARIABLE p2									:	INTEGER := 0; -- player 2 is inactive at program begin
 		VARIABLE buttonConfirmCounter			:	INTEGER := 0; -- counts number of times the button is confirmed
 	BEGIN
-		p1w <= '0';
-		p2w <= '0';
-		--rst <= '0';
+		p1w <= '0'; -- p1w = player 1 win, when 'l' this player wins
+		p2w <= '0'; -- p2w = player 2 win, when 'l' this player wins
 		IF(disp_ena = '1') THEN		--display time
 			
 			---------------------------------------------------------------------
@@ -201,8 +197,8 @@ ARCHITECTURE behavior OF hw_image_generator IS
 				END IF; -- end rising_edge if statement
 				
 				IF rising_edge(clock) THEN
-				IF confirmButton = '0' and buttonStateConfirm = false THEN
-					buttonStateConfirm := not buttonStateConfirm;
+					IF confirmButton = '0' and buttonStateConfirm = false THEN
+						buttonStateConfirm := not buttonStateConfirm;
 						-- player 1's turn
 						IF(columnNum = 0 AND p1 = 1 AND A = 0) THEN
 							buttonConfirmCounter := buttonConfirmCounter + 1;
@@ -341,7 +337,7 @@ ARCHITECTURE behavior OF hw_image_generator IS
 					p2w <= '0';
 					gameT <= '0';
 				END IF; -- reset if statement	
-			--END IF;
+
 		--------------------------------------------------- END button logic
 
 		--------------------------------------------------- START player 1 logic
@@ -355,6 +351,7 @@ ARCHITECTURE behavior OF hw_image_generator IS
 					blue <= (OTHERS => '0');
 				END IF;
 			END IF; -- end if A = 1
+			
 		IF (B = 1) THEN
 			IF(row > (rowMin + 394) AND row < (rowMax + 394) AND column > columnMin AND column < columnMax) THEN
 					red <= (7 => '1',
@@ -443,8 +440,6 @@ ARCHITECTURE behavior OF hw_image_generator IS
 				END IF;
 			END IF; -- end if I = 1
 		---------------------------------------------------------- END player 1 logic
-		
-		
 		
 		---------------------------------------------------------- START player 2 logic
 		IF (A = 2) THEN
@@ -729,64 +724,65 @@ ARCHITECTURE behavior OF hw_image_generator IS
 		---------------------------------------------------------------------
 		--------------------------- Win Conditions --------------------------
 		---------------------------------------------------------------------
-if (a = 1 AND b = 1 AND c = 1) Then 
-p1w <= '1';
-end if;
-if (a = 1 AND d = 1 AND g = 1) Then 
-p1w <= '1';
-end if;
-if (b = 1 AND e = 1 AND h = 1) Then 
-p1w <= '1';
-end if;
-if (d=1 AND e=1 AND f = 1) Then 
-p1w <= '1';
-end if;
-if (a=1 AND e=1 AND i =1) Then
-p1w <= '1';
-end if;
-if (g=1 AND h=1 and i=1) Then
-p1w <= '1';
-end if;
-if (g=1 AND e=1 AND c=1) Then 
-p1w <= '1';
-end if;
-if (c=1 AND f=1 AND i=1) Then 
-p1w <= '1';
-end if;
-if (a=2 AND b =2 AND c = 2) Then 
-p2w <= '1';
-end if;
-if (a=2 AND d =2 AND g = 2) Then 
-p2w <= '1';
-end if;
-if (b=2 AND e =2 AND h = 2) Then 
-p2w <= '1';
-end if;
-if (d=2 AND e=2 AND f = 2) Then 
-p2w <= '1';
-end if;
-if (a=2 AND e=2 AND i =2) Then
-p2w <= '1';
-end if;
-if (g=2 AND h=2 and i=2) Then
-p2w <= '1';
-end if;
-if (g=2 AND e=2 AND c=2) Then 
-p2w <= '1';
-end if;
-if (c=2 AND f=2 AND i=2) Then 
-p2w <= '1';
-end if;
-if(p2w = '0' AND p1w = '0' AND buttonConfirmCounter = 9) THEN
-gameT <= '1';
-end if;
+		-- each player has 8 different winning conditions.
+		IF (a = 1 AND b = 1 AND c = 1) THEN 
+			p1w <= '1';
+		END IF;
+		IF (a = 1 AND d = 1 AND g = 1) THEN 
+			p1w <= '1';
+		END IF;
+		IF (b = 1 AND e = 1 AND h = 1) THEN 
+			p1w <= '1';
+		END IF;
+		IF (d = 1 AND e = 1 AND f = 1) THEN 
+			p1w <= '1';
+		END IF;
+		IF (a = 1 AND e = 1 AND i = 1) THEN
+			p1w <= '1';
+		END IF;
+		IF (g = 1 AND h = 1 and i = 1) THEN
+			p1w <= '1';
+		END IF;
+		IF (g = 1 AND e = 1 AND c = 1) THEN 
+			p1w <= '1';
+		END IF;
+		IF (c = 1 AND f = 1 AND i = 1) THEN 
+			p1w <= '1';
+		END IF;
+		IF (a = 2 AND b = 2 AND c = 2) THEN 
+			p2w <= '1';
+		END IF;
+		IF (a = 2 AND d = 2 AND g = 2) THEN 
+			p2w <= '1';
+		END IF;
+		IF (b = 2 AND e = 2 AND h = 2) THEN 
+			p2w <= '1';
+		END IF;
+		IF (d = 2 AND e = 2 AND f = 2) THEN 
+			p2w <= '1';
+		END IF;
+		IF (a = 2 AND e = 2 AND i = 2) THEN
+			p2w <= '1';
+		END IF;
+		IF (g = 2 AND h = 2 and i = 2) THEN
+			p2w <= '1';
+		END IF;
+		IF (g = 2 AND e = 2 AND c = 2) THEN 
+			p2w <= '1';
+		END IF;
+		IF (c = 2 AND f = 2 AND i = 2) THEN 
+			p2w <= '1';
+		END IF;
+		IF (p2w = '0' AND p1w = '0' AND buttonConfirmCounter = 9) THEN
+			gameT <= '1';
+		END IF;
 
 		---------------------------------------------------------------------
 		--------------------------- Winner Display --------------------------
 		---------------------------------------------------------------------		
-		if (gameT = '1' AND buttonConfirmCounter = 9 AND p1w = '0' AND p2w = '0') then
+		IF (gameT = '1' AND buttonConfirmCounter = 9 AND p1w = '0' AND p2w = '0') THEN
 		------------------------------------------------------------------- T START
-	IF(row > 80 AND row < 140 AND column < 25 AND column > 5) THEN
+		IF(row > 80 AND row < 140 AND column < 25 AND column > 5) THEN
 				red <= (6 => '1',
 						  OTHERS => '0');
 				green	<= (6 => '1',
@@ -857,10 +853,11 @@ end if;
 							OTHERS => '0');
 			END IF;
 			------------------------------------------------------------------- E END
-end if;
-if (p1w = '1') then
+		END IF;
+		
 	------------------------------------------------------------------- Red win cube
-	IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
+		IF (p1w = '1') THEN
+		IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
 				red <= (7 => '1',
 							6 => '1',
 							5 => '1',
@@ -869,7 +866,7 @@ if (p1w = '1') then
 				blue <= (OTHERS => '0');
 			END IF;
 	------------------------------------------------------------------- START W
-	IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
+		IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
 				red <= (6 => '1',
 						  OTHERS => '0');
 				green	<= (6 => '1',
@@ -877,132 +874,132 @@ if (p1w = '1') then
 				blue <= (6 => '1',
 							OTHERS => '0');
 			END IF;
-	IF(row > 119 AND row < 140 AND column < 100 AND column > 80) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 139 AND row < 160 AND column < 100 AND column > 30) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 159 AND row < 180 AND column < 100 AND column > 80) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 179 AND row < 200 AND column < 100 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
+		IF(row > 119 AND row < 140 AND column < 100 AND column > 80) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 139 AND row < 160 AND column < 100 AND column > 30) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 159 AND row < 180 AND column < 100 AND column > 80) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 179 AND row < 200 AND column < 100 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
 	------------------------------------------------------------------- END W
 	
 	------------------------------------------------------------------- START I
-	IF(row > 220 AND row < 240 AND column < 100 AND column > 40) THEN
+		IF(row > 220 AND row < 240 AND column < 100 AND column > 40) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+			IF(row > 220 AND row < 240 AND column < 25 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		------------------------------------------------------------------- END I
+		
+		------------------------------------------------------------------- START N
+		IF(row > 260 AND row < 280 AND column < 100 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 279 AND row < 320 AND column < 25 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 319 AND row < 340 AND column < 100 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		------------------------------------------------------------------- END N
+		
+		------------------------------------------------------------------- START S
+		IF(row > 360 AND row < 420 AND column < 26 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 360 AND row < 380 AND column < 50 AND column > 25) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 360 AND row < 420 AND column < 60 AND column > 39) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 400 AND row < 420 AND column < 81 AND column > 59) THEN
 		red <= (6 => '1',
 				  OTHERS => '0');
 		green	<= (6 => '1',
 					 OTHERS => '0');
 		blue <= (6 => '1',
 					OTHERS => '0');
-	END IF;
-		IF(row > 220 AND row < 240 AND column < 25 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	------------------------------------------------------------------- END I
-	
-	------------------------------------------------------------------- START N
-	IF(row > 260 AND row < 280 AND column < 100 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 279 AND row < 320 AND column < 25 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 319 AND row < 340 AND column < 100 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	------------------------------------------------------------------- END N
-	
-	------------------------------------------------------------------- START S
-	IF(row > 360 AND row < 420 AND column < 26 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 360 AND row < 380 AND column < 50 AND column > 25) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 360 AND row < 420 AND column < 60 AND column > 39) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 400 AND row < 420 AND column < 81 AND column > 59) THEN
-	red <= (6 => '1',
-			  OTHERS => '0');
-	green	<= (6 => '1',
-				 OTHERS => '0');
-	blue <= (6 => '1',
-				OTHERS => '0');
-	END IF;
-	IF(row > 360 AND row < 420 AND column < 100 AND column > 80) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
+		END IF;
+		IF(row > 360 AND row < 420 AND column < 100 AND column > 80) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
 	------------------------------------------------------------------- END S
 	
 	------------------------------------------------------------------- Purple win cube
-ELSIF (p2w = '1') THEN
-IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
+		ELSIF (p2w = '1') THEN
+		IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
 				red <= (7 => '1',
 							6 => '1',
 							OTHERS => '0');
@@ -1010,142 +1007,139 @@ IF(row > 5 AND row < 95 AND column < 100 AND column > 5) THEN
 				blue <= (7 => '1',
 							6 => '1',
 							OTHERS => '0');
-	END IF;
+		END IF;
 	
 	------------------------------------------------------------------- START W
-	IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
-				red <= (6 => '1',
-						  OTHERS => '0');
-				green	<= (6 => '1',
-							 OTHERS => '0');
-				blue <= (6 => '1',
-							OTHERS => '0');
-			END IF;
-	IF(row > 119 AND row < 140 AND column < 100 AND column > 80) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
+		IF(row > 100 AND row < 120 AND column < 100 AND column > 5) THEN
+					red <= (6 => '1',
+							  OTHERS => '0');
+					green	<= (6 => '1',
+								 OTHERS => '0');
+					blue <= (6 => '1',
+								OTHERS => '0');
+				END IF;
+		IF(row > 119 AND row < 140 AND column < 100 AND column > 80) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 139 AND row < 160 AND column < 100 AND column > 30) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 159 AND row < 180 AND column < 100 AND column > 80) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 179 AND row < 200 AND column < 100 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		------------------------------------------------------------------- END W
+		
+		------------------------------------------------------------------- START I
+		IF(row > 220 AND row < 240 AND column < 100 AND column > 40) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+			IF(row > 220 AND row < 240 AND column < 25 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		------------------------------------------------------------------- END I
+		
+		------------------------------------------------------------------- START N
+		IF(row > 260 AND row < 280 AND column < 100 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 279 AND row < 320 AND column < 25 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 319 AND row < 340 AND column < 100 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		------------------------------------------------------------------- END N
+		
+		------------------------------------------------------------------- START S
+		IF(row > 360 AND row < 420 AND column < 26 AND column > 5) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 360 AND row < 380 AND column < 50 AND column > 25) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 360 AND row < 420 AND column < 60 AND column > 39) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 400 AND row < 420 AND column < 81 AND column > 59) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		IF(row > 360 AND row < 420 AND column < 100 AND column > 80) THEN
+			red <= (6 => '1',
+					  OTHERS => '0');
+			green	<= (6 => '1',
+						 OTHERS => '0');
+			blue <= (6 => '1',
+						OTHERS => '0');
+		END IF;
+		------------------------------------------------------------------- END S
 	END IF;
-	IF(row > 139 AND row < 160 AND column < 100 AND column > 30) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 159 AND row < 180 AND column < 100 AND column > 80) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 179 AND row < 200 AND column < 100 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	------------------------------------------------------------------- END W
-	
-	------------------------------------------------------------------- START I
-	IF(row > 220 AND row < 240 AND column < 100 AND column > 40) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-		IF(row > 220 AND row < 240 AND column < 25 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	------------------------------------------------------------------- END I
-	
-	------------------------------------------------------------------- START N
-	IF(row > 260 AND row < 280 AND column < 100 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 279 AND row < 320 AND column < 25 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 319 AND row < 340 AND column < 100 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	------------------------------------------------------------------- END N
-	
-	------------------------------------------------------------------- START S
-	IF(row > 360 AND row < 420 AND column < 26 AND column > 5) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 360 AND row < 380 AND column < 50 AND column > 25) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 360 AND row < 420 AND column < 60 AND column > 39) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	IF(row > 400 AND row < 420 AND column < 81 AND column > 59) THEN
-	red <= (6 => '1',
-			  OTHERS => '0');
-	green	<= (6 => '1',
-				 OTHERS => '0');
-	blue <= (6 => '1',
-				OTHERS => '0');
-	END IF;
-	IF(row > 360 AND row < 420 AND column < 100 AND column > 80) THEN
-		red <= (6 => '1',
-				  OTHERS => '0');
-		green	<= (6 => '1',
-					 OTHERS => '0');
-		blue <= (6 => '1',
-					OTHERS => '0');
-	END IF;
-	------------------------------------------------------------------- END S
-end if;
-	--if ( p1w = '1' OR p2w = '1' Or gameT = '1') then
-	--rst <= '0' after 1000000000000000000 ns;
-	--end if;
 	END PROCESS;
 END behavior;

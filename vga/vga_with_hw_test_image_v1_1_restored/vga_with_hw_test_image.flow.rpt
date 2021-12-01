@@ -1,5 +1,5 @@
 Flow report for vga_with_hw_test_image
-Tue Nov 23 14:09:33 2021
+Tue Nov 30 11:12:10 2021
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue Nov 23 14:09:33 2021       ;
+; Flow Status                        ; Successful - Tue Nov 30 11:12:10 2021       ;
 ; Quartus Prime Version              ; 16.1.0 Build 196 10/24/2016 SJ Lite Edition ;
 ; Revision Name                      ; vga_with_hw_test_image                      ;
 ; Top-level Entity Name              ; vga_with_hw_test_image                      ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+------------------------+
 ; Option            ; Setting                ;
 +-------------------+------------------------+
-; Start date & time ; 11/23/2021 14:09:00    ;
+; Start date & time ; 11/30/2021 11:11:32    ;
 ; Main task         ; Compilation            ;
 ; Revision Name     ; vga_with_hw_test_image ;
 +-------------------+------------------------+
@@ -76,7 +76,7 @@ agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 225235270638848.163769454018784        ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 225235270638848.163828869213596        ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                   ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                 ; <None>        ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --             ;
@@ -98,12 +98,12 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:14     ; 1.0                     ; 4806 MB             ; 00:00:29                           ;
-; Fitter                    ; 00:00:10     ; 1.0                     ; 5697 MB             ; 00:00:18                           ;
+; Analysis & Synthesis      ; 00:00:15     ; 1.0                     ; 4806 MB             ; 00:00:29                           ;
+; Fitter                    ; 00:00:13     ; 1.0                     ; 5700 MB             ; 00:00:17                           ;
 ; Assembler                 ; 00:00:02     ; 1.0                     ; 4678 MB             ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:02     ; 1.1                     ; 4855 MB             ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:02     ; 1.1                     ; 4851 MB             ; 00:00:02                           ;
 ; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4653 MB             ; 00:00:01                           ;
-; Total                     ; 00:00:29     ; --                      ; --                  ; 00:00:53                           ;
+; Total                     ; 00:00:33     ; --                      ; --                  ; 00:00:52                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
